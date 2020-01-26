@@ -10,24 +10,35 @@ pipeline {
             steps {
                 echo '=== Building Application ==='
                 //bat 'mvn -f pom.xml -B -DskipTests clean install package'
-                bat 'mvn -f pom.xml clean install package'
+                //bat 'mvn -f pom.xml clean install package'
+                bat 'mvn clean package -DskipTests=true'
             }
         }
         stage('Test Application') {
             steps {
-                echo '=== Testing Application ==='
-                bat 'mvn test'
+                echo '=== Unit Testing Application ==='
+                //bat 'mvn test'
+                bat 'mvn surefire:test'
             }
-            post {
-                always {
-                    junit 'target/failsafe-reports/*.xml'
-                }
+            steps {
+                echo '=== Integration Testing Application ==='
+                bat 'mvn failsafe:integration-test'
             }
         }
-        stage('Build Docker Image') {
+        post {
+        always {
+            junit 'target/failsafe-reports/*.xml'
+        }
+        failure {
+            mail to: 'sivasai.v9@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
+        }
+    }
+}
+            
+        /*stage('Build Docker Image') {
             /*when {
                 branch 'master'
-            }*/
+            }
             steps {
                 echo '=== Building Image ==='
                 script {
@@ -58,4 +69,4 @@ pipeline {
             }
         }
     }
-}
+}*/
