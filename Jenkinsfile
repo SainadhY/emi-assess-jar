@@ -9,13 +9,13 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
-                cmd.exe /C 'C:\Users\sony\Downloads\apache-maven-3.6.1-bin\apache-maven-3.6.1\bin\mvn.cmd -f pom.xml -B -DskipTests clean package' 
+                cmd.exe /C 'C:/Users/sony/Downloads/apache-maven-3.6.1-bin/apache-maven-3.6.1/bin/mvn.cmd -f pom.xml -B -DskipTests clean package' 
             }
         }
         stage('Test Application') {
             steps {
                 echo '=== Testing Application ==='
-                cmd.exe /C 'C:\Users\sony\Downloads\apache-maven-3.6.1-bin\apache-maven-3.6.1\bin\mvn.cmd test'
+                cmd.exe /C 'C:/Users/sony/Downloads/apache-maven-3.6.1-bin/apache-maven-3.6.1/bin/mvn.cmd test'
             }
             post {
                 always {
