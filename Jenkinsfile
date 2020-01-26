@@ -9,10 +9,11 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
-                bat 'mvn -f pom.xml -B -DskipTests clean package'
+                //bat 'mvn -f pom.xml -B -DskipTests clean package'
+                bat 'mvn -f pom.xml clean install package'
             }
         }
-        stage('Test Application') {
+        /*stage('Test Application') {
             steps {
                 echo '=== Testing Application ==='
                 bat 'mvn test'
@@ -22,7 +23,7 @@ pipeline {
                     junit 'target/failsafe-reports/*.xml'
                 }
             }
-        }
+        }*/
         stage('Build Docker Image') {
             when {
                 branch 'master'
