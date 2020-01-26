@@ -9,13 +9,13 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
-                cmd 'mvn -f pom.xml -B -DskipTests clean package'
+                bat 'mvn -f pom.xml -B -DskipTests clean package'
             }
         }
         stage('Test Application') {
             steps {
                 echo '=== Testing Application ==='
-                cmd 'mvn test'
+                bat 'mvn test'
             }
             post {
                 always {
@@ -53,7 +53,7 @@ pipeline {
         stage('Remove local images') {
             steps {
                 echo '=== Delete the local docker images ==='
-                cmd "docker rmi $registry:$BUILD_NUMBER"
+                bat "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
