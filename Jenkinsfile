@@ -3,18 +3,18 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh "echo $M2_HOME"
+                sh 'echo $M2_HOME'
                 sh '/usr/local/apache-maven/bin/mvn clean package -DskipTests=true'
             }
         }
         stage('Unit Tests') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true test'
+               // sh 'mvn -Dmaven.test.failure.ignore=true test'
             }
         }
          stage('Integration Tests') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true failsafe:integration-test'
+               // sh 'mvn -Dmaven.test.failure.ignore=true failsafe:integration-test'
             }
         }
     }
