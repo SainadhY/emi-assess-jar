@@ -9,7 +9,7 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
-                bat 'mvn -f pom.xml -B -DskipTests clean package'
+                bat 'mvn -f pom.xml -B -DskipTests clean install package'
                 //bat 'mvn -f pom.xml clean install package'
             }
         }
