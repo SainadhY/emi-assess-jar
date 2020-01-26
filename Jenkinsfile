@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
-                bat 'mvn failsafe:test'
+                bat 'mvn test'
             }
         }
          stage('Integration Tests') {
