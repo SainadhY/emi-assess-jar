@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
-                bat 'mvn test'
+                bat 'mvn -Dmaven.test.failure.ignore=true test'
             }
         }
          stage('Integration Tests') {
             steps {
-                bat 'mvn failsafe:integration-test'
+                bat 'mvn -Dmaven.test.failure.ignore=true failsafe:integration-test'
             }
         }
     }
