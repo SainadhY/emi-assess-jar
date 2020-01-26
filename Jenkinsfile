@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+    registry = "ysainadh/assessapp"
+    registryCredential = 'dockerhub'
+  }
+    
     agent any
     stages {
         stage('Compile') {
@@ -16,7 +21,22 @@ pipeline {
                 bat 'mvn -Dmaven.test.failure.ignore=true failsafe:integration-test'
             }
         }
-    }
+         stage('Building image') {
+            steps{
+              script {
+                docker.build registry + ":$BUILD_NUMBER"
+              }
+           }
+        }
+         stage('Deploy Image') {
+              steps{
+                script {
+                  docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                 }
+              }
+           }
+         }
     post {
         always {
             junit 'target/failsafe-reports/TEST-*.xml'
