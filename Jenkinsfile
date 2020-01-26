@@ -4,7 +4,7 @@ pipeline {
         stage('Compile') {
             steps {
                 sh "echo $M2_HOME"
-                sh 'mvn clean package -DskipTests=true'
+                sh '/usr/local/apache-maven/bin/mvn clean package -DskipTests=true'
             }
         }
         stage('Unit Tests') {
