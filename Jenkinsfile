@@ -6,11 +6,6 @@ pipeline {
     }
     agent any
     stages {
-        stage('Cloning Git') {
-            steps {
-                git 'https://github.com/SainadhY/emi-assess-jar.git'
-            }
-        }
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
