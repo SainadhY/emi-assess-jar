@@ -9,13 +9,13 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
-                cmd.exe /C "C:/Users/sony/Downloads/apache-maven-3.6.1-bin/apache-maven-3.6.1/bin/mvn.cmd -f pom.xml -B -DskipTests clean package"
+                cmd 'mvn -f pom.xml -B -DskipTests clean package"
             }
         }
         stage('Test Application') {
             steps {
                 echo '=== Testing Application ==='
-                cmd.exe /C 'C:/Users/sony/Downloads/apache-maven-3.6.1-bin/apache-maven-3.6.1/bin/mvn.cmd test'
+                cmd 'mvn test'
             }
             post {
                 always {
@@ -53,7 +53,7 @@ pipeline {
         stage('Remove local images') {
             steps {
                 echo '=== Delete the local docker images ==='
-                sh "C:\cygwin64\home\sony\.minikube docker rmi $registry:$BUILD_NUMBER"
+                cmd "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
