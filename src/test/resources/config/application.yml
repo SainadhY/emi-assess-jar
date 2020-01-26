@@ -17,7 +17,7 @@ spring:
   application:
     name: UMSL
   mail:
-    host: 192.168.0.46
+    host: localhost
   main:
     allow-bean-definition-overriding: true
   messages:
@@ -41,7 +41,7 @@ spring:
 
 server:
   port: 10344
-  address: 192.168.0.46
+  address: localhost
 
 # ===================================================================
 # JHipster specific properties
@@ -58,7 +58,7 @@ jhipster:
     # To test logstash appender
     logstash:
       enabled: true
-      host: 192.168.0.46
+      host: localhost
       port: 5000
       queue-size: 512
   security:
