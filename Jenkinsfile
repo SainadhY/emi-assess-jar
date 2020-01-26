@@ -26,11 +26,12 @@ pipeline {
             }
         }
         post {
-        always {
-            junit 'target/failsafe-reports/*.xml'
-        }
-        failure {
-            mail to: 'sivasai.v9@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
+            always {
+                junit 'target/failsafe-reports/*.xml'
+            }
+            failure {
+                mail to: 'sivasai.v9@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
+            }
         }
     }
 }
