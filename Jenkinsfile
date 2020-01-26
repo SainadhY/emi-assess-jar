@@ -9,11 +9,13 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
+                sh 'echo executing unit tests'
                // sh 'mvn -Dmaven.test.failure.ignore=true test'
             }
         }
          stage('Integration Tests') {
             steps {
+                sh 'echo executing integration tests'
                // sh 'mvn -Dmaven.test.failure.ignore=true failsafe:integration-test'
             }
         }
