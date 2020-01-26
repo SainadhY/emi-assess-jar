@@ -25,6 +25,6 @@ pipeline {
         }*/
         /*failure {
             mail to: 'sivasai.v9@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
-        }*/
-    }
+        }
+    }*/
 }
