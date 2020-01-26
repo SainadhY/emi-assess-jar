@@ -9,13 +9,13 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Application ==='
-                sh 'mvnw -B -DskipTests clean package' 
+                sh 'mvn -B -DskipTests clean package' 
             }
         }
         stage('Test Application') {
             steps {
                 echo '=== Testing Application ==='
-                sh 'mvnw test'
+                sh 'mvn test'
             }
             post {
                 always {
