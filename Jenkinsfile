@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh 'echo $M2_HOME'
                 sh '/usr/local/apache-maven/bin/mvn clean package -DskipTests=true'
             }
         }
@@ -20,10 +19,10 @@ pipeline {
             }
         }
     }
-    post {
+    /*post {
         always {
             junit 'target/failsafe-reports/TEST-*.xml'
-        }
+        }*/
         /*failure {
             mail to: 'sivasai.v9@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
         }*/
