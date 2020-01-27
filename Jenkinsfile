@@ -23,16 +23,16 @@ pipeline {
                 sh '/usr/local/apache-maven/bin/mvn -Dmaven.test.failure.ignore=true failsafe:integration-test'
             }
         }
-        stage('Building image') {
+       stage('Building image') {
             steps{
               script {
-                 sh 'sudo docker build -t javabuild .'
+                 sh 'sudo docker build -t ysainadh/assessapp .'
                 }
             }
         }
         stage('Deploy Image') {
-            steps{
-                /*script {
+            /*steps{
+                script {
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
@@ -44,16 +44,16 @@ pipeline {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'Docker', url: 'https://registry.hub.docker.com'){
                         //app.push("$SHORT_COMMIT")
                         //app.push("latest")
-                        sh 'sudo docker push javabuild:latest'
+                        sh 'sudo docker push ysainadh/assessapp:latest'
                     }
                 }
             }
         }
-        stage('Remove local images') {
+        /*stage('Remove local images') {
             steps {
                 echo '=== Delete the local docker images ==='
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
-        }
+        }*/
     }
 }
