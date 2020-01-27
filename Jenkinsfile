@@ -36,7 +36,7 @@ pipeline {
                 script {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
-                    withDockerRegistry(credentialsId: 'docker', toolName: 'Docker', url: 'https://registry.hub.docker.com'){
+                    withDockerRegistry(credentialsId: 'docker', url: 'https://registry.hub.docker.com'){
                         //app.push("$SHORT_COMMIT")
                         //app.push("latest")
                         sh 'sudo docker push ysainadh/assessapp:latest'
