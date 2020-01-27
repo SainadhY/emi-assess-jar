@@ -26,14 +26,14 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                  sudo docker.build registry + ":$BUILD_NUMBER"
+                 sh 'sudo docker build -f ./Dockerfile -t javabuild:v8'
                 }
-           }
+            }
         }
         stage('Deploy Image') {
             steps{
                 script {
-                    sudo docker.withRegistry( '', registryCredential ) {
+                    sh sudo docker.withRegistry( '', registryCredential ) {
                         sudo dockerImage.push()
                     }
                 }
