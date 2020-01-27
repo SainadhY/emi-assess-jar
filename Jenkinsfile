@@ -26,7 +26,7 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                 sh 'sudo docker build -f ./Dockerfile -t javabuild:v8'
+                 sh 'sudo docker build -t javabuild .'
                 }
             }
         }
