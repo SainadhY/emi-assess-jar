@@ -37,8 +37,6 @@ pipeline {
                         dockerImage.push()
                     }
                 }
-            }
-            steps {
                 echo '=== Pushing Docker Image ==='
                 script {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
