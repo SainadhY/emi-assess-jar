@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: UMSL-app
+
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: umslapp
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8081
+
+  type: LoadBalancer

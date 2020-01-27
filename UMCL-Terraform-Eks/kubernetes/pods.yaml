@@ -1,0 +1,19 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umslapp
+spec:
+  # minReadySeconds: 30
+  selector:
+    matchLabels:
+      app: umslapp
+  replicas: 2
+  template: # template for the pods
+    metadata:
+      labels:
+        app: umslapp
+    spec:
+      containers:
+      - name: umslapp
+        image: ysainadh/assessapp

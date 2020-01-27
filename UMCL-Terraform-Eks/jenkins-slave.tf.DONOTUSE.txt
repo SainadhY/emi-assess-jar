@@ -1,0 +1,21 @@
+resource "aws_instance" "jenkins-slave" {
+  ami                    = "ami-01e074f40dfb9999d"
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = ["${aws_security_group.mainsg.id}"]
+  subnet_id              = "${local.pub_sub_ids[0]}"
+  key_name               = "${var.key_name}"
+
+  #key_name  = "${aws_key_pair.deployer.key_name}"
+  user_data = "${file("jenkins-slave.sh")}"
+
+  #associate_public_ip_address = true
+
+  tags = {
+    Name = "Jenkins-slave"
+  }
+  root_block_device {
+    volume_type           = "${var.volume_type}"
+    volume_size           = "${var.root_disk_size_gb}"
+    delete_on_termination = true
+  }
+}
