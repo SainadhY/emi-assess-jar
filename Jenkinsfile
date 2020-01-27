@@ -35,9 +35,9 @@ pipeline {
                 script {
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
-                        }
                     }
                 }
+            }
             steps {
                 echo '=== Pushing Docker Image ==='
                 script {
