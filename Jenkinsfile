@@ -32,18 +32,19 @@ pipeline {
         }
         stage('Deploy Image') {
             steps{
-                script {
-                    sh sudo docker.withRegistry( '', registryCredential ) {
-                        sudo dockerImage.push()
+                /*script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
                     }
-                }
+                }*/
                 echo '=== Pushing Docker Image ==='
                 script {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
-                    sudo docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
-                        app.push("$SHORT_COMMIT")
-                        app.push("latest")
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'Docker', url: 'https://registry.hub.docker.com'){
+                        //app.push("$SHORT_COMMIT")
+                        //app.push("latest")
+                        sh 'sudo docker push javabuild:latest'
                     }
                 }
             }
@@ -51,7 +52,7 @@ pipeline {
         stage('Remove local images') {
             steps {
                 echo '=== Delete the local docker images ==='
-                sh "sudo docker rmi $registry:$BUILD_NUMBER"
+                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
