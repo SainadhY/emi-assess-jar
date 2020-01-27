@@ -4,7 +4,7 @@ pipeline {
         registryCredential = 'docker'
         dockerImage = ''
     }
-    agent any
+    agent ec2-slave
     stages {
         stage('Compile') {
             steps {
